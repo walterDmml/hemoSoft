@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<!-- 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" -->
+
+<head>
+<meta charset="UTF-8" />
+<title>Listagem de Enfermeiros</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Hemo-Soft</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Inicio</a></li>
+				<li  class="active"><a th:href="@{/doadores/lista}">Doadores</a></li>
+				<li  class="active"><a th:href="@{/bolsas/lista}">Bolsas</a></li>
+				<li  class="active"><a th:href="@{/enfermeiros/lista}">Enfermeiros</a></li>
+				<li><a href="#">Agendamento</a></li>
+			</ul>
+			<button class="btn btn-danger navbar-btn">Sair</button>
+		</div>
+	</nav>
+
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+		<span th:text="${mensagem}">Enfermeiro salvo com sucesso!!!</span>
+	</div>
+
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title hs-Pdoadores-panel">Pesquisa de Doadores</h1>
+				<a class="btn btn-link hs-link-panel" href="/enfermeiros/novo">Novo
+					Enfermeiro</a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="panel-body">
+
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-2">MATRICULA</th>
+							<th class="text-center col-md-4">NOME</th>
+							<th class="text-center col-md-1">TIPO</th>
+							<th class="text-center col-md-1">SEXO</th>
+							<th class="text-center col-md-1">TELEFONE</th>
+							<th class="text-center col-md-2">CIDADE</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr th:each="enfermeiro : ${enfermeiros}">
+							<td class="text-center" th:text="${enfermeiro.matricula}"></td>
+							<td class="text-center" th:text="${enfermeiro.nome}"></td>
+							<td class="text-center"><span class="label label-danger"
+								th:text="${enfermeiro.tipoS.TipoDescricao}"> </span></td>
+							<td class="text-center" th:text="${enfermeiro.sexo}"></td>
+							<td class="text-center" th:text="${enfermeiro.telefone}"></td>
+							<td class="text-center" th:text="${enfermeiro.cidade}"></td>
+
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/enfermeiros/{id}(id=${enfermeiro.id})}"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#ModalExcluir"
+								th:attr="data-id=${enfermeiro.id}, data-nome=${enfermeiro.nome}"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
+						</tr>
+
+
+						<tr>
+							<td colspan="6" th:if="${#lists.isEmpty(enfermeiros)}">Nenhum
+								enfermeiro encontrado!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+			<div class="modal fade" id="ModalExcluir" tabindex="-1"
+				data-keyboard="false" data-backdrop="static">
+				<div class="modal-dialog">
+					<form th:attr="data-url-id='/enfermeiros'" method="POST">
+						<input type="hidden" name="_method" value="DELETE" />
+
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Você tem certeza?</h4>
+							</div>
+
+							<div class="modal-body">
+								<span>Tem certeza que deseja apagar o enfermeiro?</span>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+								<button type="submit" class="btn btn-primary">Excluir</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery-2.1.4.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/hemosoft.js"></script>
+</body>
+</html>
