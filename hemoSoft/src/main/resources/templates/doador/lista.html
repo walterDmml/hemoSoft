@@ -19,19 +19,22 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Inicio</a></li>
-				<li  class="active"><a th:href="@{/doadores/lista}">Doadores</a></li>
-				<li  class="active"><a th:href="@{/bolsas/lista}">Bolsas</a></li>
-				<li  class="active"><a th:href="@{/enfermeiros/lista}">Enfermeiros</a></li>
+				<li class="active"><a th:href="@{/doadores/lista}">Doadores</a></li>
+				<li class="active"><a th:href="@{/bolsas/lista}">Bolsas</a></li>
+				<li class="active"><a th:href="@{/enfermeiros/lista}">Enfermeiros</a></li>
 				<li><a href="#">Agendamento</a></li>
 			</ul>
-			<button class="btn btn-danger navbar-btn">Sair</button>
+			<button class="btn btn-danger navbar-btn"><a th:href="@{/logout}">Sair</a></button>
 		</div>
 	</nav>
 
 	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
 		<span th:text="${mensagem}">Doador salvo com sucesso!!!</span>
 	</div>
-
+	Roles:
+	<h4>
+		<div sec:authentication="principal.authorities"></div>
+	</h4>
 
 	<div class="panel panel-default">
 		<div class="panel-heading">

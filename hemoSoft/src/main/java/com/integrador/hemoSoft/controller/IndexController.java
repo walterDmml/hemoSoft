@@ -13,8 +13,9 @@ import com.integrador.hemoSoft.model.User;
 @Controller
 public class IndexController {
 
-	@GetMapping("/login")
+	@GetMapping("/")
 	public String login(@AuthenticationPrincipal User user) {
+		System.out.println("Teste");
 	    if(user != null) {
             return "redirect:/doador/lista";
         }
@@ -26,9 +27,11 @@ public class IndexController {
         return "entrar";
     }
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/")
+	@RequestMapping(method = RequestMethod.POST, path = "/inicio")
     public String inicio() {
         return "inicio";
     }
+	
+	
 	
 }

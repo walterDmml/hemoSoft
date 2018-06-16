@@ -24,10 +24,7 @@
 		</div>
 	</nav>
 	
-	Roles:
-	<h4>
-		<div sec:authentication="principal.authorities"></div>
-	</h4>
+	
 	<form class="form-horizontal" method="POST" action="/doadores"
 		th:object="${doador}">
 		<div class="alert alert-success"

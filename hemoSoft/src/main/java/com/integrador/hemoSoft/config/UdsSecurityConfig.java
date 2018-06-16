@@ -7,10 +7,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.integrador.hemoSoft.security.GpUserDetailsService;
 
-@Configuration
+//@Configuration
 public class UdsSecurityConfig {
 	
-	@Autowired
+	//@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder builder, 
 			PasswordEncoder passwordEncoder, 
 			GpUserDetailsService userDetailsService) throws Exception {
